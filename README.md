@@ -1,2 +1,0 @@
-# VeiculeSale
-Veicule Sale API

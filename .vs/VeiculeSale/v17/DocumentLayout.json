@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{218AEBC5-89AF-4168-9A84-B0C444796935}|src\\Domain\\Domain.csproj|d:\\desenvolvimento\\.net\\postech\\veiculesale\\src\\domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{218AEBC5-89AF-4168-9A84-B0C444796935}|src\\Domain\\Domain.csproj|solutionrelative:src\\domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0C5A3F8-BB46-42BB-A40A-DF701436DF17}|src\\Infrastructure\\Infrastructure.csproj|d:\\desenvolvimento\\.net\\postech\\veiculesale\\src\\infrastructure\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0C5A3F8-BB46-42BB-A40A-DF701436DF17}|src\\Infrastructure\\Infrastructure.csproj|solutionrelative:src\\infrastructure\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41C52397-3F2E-40FA-877B-F905EAC5912A}|src\\Application\\Application.csproj|d:\\desenvolvimento\\.net\\postech\\veiculesale\\src\\application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41C52397-3F2E-40FA-877B-F905EAC5912A}|src\\Application\\Application.csproj|solutionrelative:src\\application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\src\\Domain\\Class1.cs",
+              "RelativeDocumentMoniker": "src\\Domain\\Class1.cs",
+              "ToolTip": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\src\\Domain\\Class1.cs",
+              "RelativeToolTip": "src\\Domain\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T01:27:48.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\src\\Infrastructure\\Class1.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Class1.cs",
+              "ToolTip": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\src\\Infrastructure\\Class1.cs",
+              "RelativeToolTip": "src\\Infrastructure\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T01:27:02.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\src\\Application\\Class1.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Class1.cs",
+              "ToolTip": "D:\\Desenvolvimento\\.NET\\PosTech\\VeiculeSale\\src\\Application\\Class1.cs",
+              "RelativeToolTip": "src\\Application\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T01:26:21.505Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
