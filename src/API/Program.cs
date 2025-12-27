@@ -18,7 +18,8 @@ builder.Services.AddDbContext<VeiculeSaleDbContext>(options =>
 // Registrando os Repositórios
 builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddScoped<IVendaRepository, VendaRepository>();
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>(); // Se criar esse
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
 
 // MediatR.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.UseCases.Veiculos.Commands.CadastrarVeiculo.CadastrarVeiculoHandler).Assembly));
@@ -37,10 +38,33 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+} 
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<VeiculeSaleDbContext>();
+
+        if (context.Database.GetPendingMigrations().Any())
+        {
+            context.Database.Migrate();
+        }
+
+        Console.WriteLine("--> Banco de dados migrado com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"--> Erro crítico ao migrar banco: {ex.Message}");
+    }
+}
 
 app.Run();

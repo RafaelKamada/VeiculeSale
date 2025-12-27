@@ -6,5 +6,7 @@ namespace Domain.Interfaces
     {
         Task AdicionarAsync(Cliente cliente);
         Task<Cliente?> ObterPorCpfAsync(string cpf);
+        Task<Cliente?> ObterPorIdAsync(Guid id);
+        Task AtualizarAsync(Cliente cliente);
     }
 }

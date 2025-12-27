@@ -1,13 +1,13 @@
 services:
   api:
-    image: ${DOCKER_REGISTRY-}api
+    image: veiculesale-api
     build:
       context: .
       dockerfile: src/API/Dockerfile
     ports: 
-      - "5000:80"
+      - "${API_PORT}:8080"
     environment:
-      - ConnectionStrings__DefaultConnection=Host=db-veiculos;Database=veiculos;Username=sa;Password=SenhaForte!
+      - ConnectionStrings__DefaultConnection=Host=db-veiculos;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
     depends_on:
       - db-veiculos
 
@@ -15,10 +15,13 @@ services:
     image: postgres:latest
     container_name: db-veiculos-postgres
     environment:
-      - POSTGRES_DB=veiculos
-      - POSTGRES_USER=sa
-      - POSTGRES_PASSWORD=SenhaForte!
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

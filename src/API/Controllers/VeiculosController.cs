@@ -32,13 +32,28 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Editar(Guid id, [FromBody] EditarVeiculoCommand command)
         {
-            if (id != command.Id) return BadRequest("ID da URL difere do ID do corpo.");
+            try
+            {
+                if (id != command.Id) return BadRequest("ID da URL diferente do ID do corpo.");
 
-            await _mediator.Send(command);
-            return NoContent();  
+                await _mediator.Send(command);
+                return NoContent();
+            }
+            catch (InvalidOperationException)
+            {
+                return Conflict(new { message = "Nao e possivel editar veiculo vendido." });
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (ArgumentException)
+            {
+                return ValidationProblem("Dados invalidos");
+            }
         }
 
-        [HttpGet("a-venda")]
+        [HttpGet("disponiveis")]
         [ProducesResponseType(typeof(IEnumerable<VeiculoDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListarAVenda()
         {
