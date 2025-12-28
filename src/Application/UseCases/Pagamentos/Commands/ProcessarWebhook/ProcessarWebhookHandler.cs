@@ -38,7 +38,7 @@ namespace Application.UseCases.Pagamentos.Commands.ProcessarWebhook
                 venda.Confirmar();
                 veiculo.Vender();
             }
-            else if (request.NovoStatus == PagamentoStatus.Falha)
+            else if (request.NovoStatus == PagamentoStatus.Cancelado)
             {
                 venda.Cancelar();
                 veiculo.Disponibilizar();

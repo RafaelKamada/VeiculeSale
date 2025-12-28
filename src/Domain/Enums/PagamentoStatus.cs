@@ -10,6 +10,6 @@ namespace Domain.Enums
     {
         Processando = 1,
         Aprovado = 2,
-        Falha = 3
+        Cancelado = 3
     }
 }
