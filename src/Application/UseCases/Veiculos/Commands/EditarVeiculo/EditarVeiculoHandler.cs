@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces;
 using MediatR; 
+
 namespace Application.UseCases.Veiculos.Commands.EditarVeiculo
 {
     public class EditarVeiculoHandler : IRequestHandler<EditarVeiculoCommand>
@@ -16,7 +17,7 @@ namespace Application.UseCases.Veiculos.Commands.EditarVeiculo
             var veiculo = await _repository.ObterPorIdAsync(request.Id);
 
             if (veiculo == null)
-                throw new Exception("Veículo não encontrado.");
+                throw new KeyNotFoundException("Veículo não encontrado.");
              
             veiculo.AtualizarDados(
                 request.Marca,
