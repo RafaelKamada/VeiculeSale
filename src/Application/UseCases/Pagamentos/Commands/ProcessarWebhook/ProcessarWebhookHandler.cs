@@ -25,7 +25,7 @@ namespace Application.UseCases.Pagamentos.Commands.ProcessarWebhook
             var pagamento = await _pagamentoRepo.ObterPorCodigoTransacaoAsync(request.CodigoTransacao);
 
             if (pagamento == null)
-                throw new Exception("Transação não encontrada.");
+                throw new KeyNotFoundException("Transação não encontrada.");
 
             pagamento.AtualizarStatusPeloWebhook(request.NovoStatus);
             await _pagamentoRepo.AtualizarAsync(pagamento);

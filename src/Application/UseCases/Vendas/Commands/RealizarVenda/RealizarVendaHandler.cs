@@ -1,6 +1,7 @@
 ﻿using Application.UseCases.Vendas.DTOs;
 using Domain.Entities;
 using Domain.Enums;
+using Domain.Exceptions;
 using Domain.Interfaces;
 using MediatR; 
 
@@ -30,10 +31,10 @@ namespace Application.UseCases.Vendas.Commands.RealizarVenda
             var veiculo = await _veiculoRepo.ObterPorIdAsync(request.VeiculoId);
 
             if (veiculo is null)
-                throw new Exception("Veículo não encontrado.");
+                throw new KeyNotFoundException("Veículo não encontrado.");
 
             if (veiculo.Status != VeiculoStatus.Disponivel)
-                throw new Exception("Veículo não está disponível para venda.");
+                throw new DomainException("Veículo não está disponível para venda.");
 
             var cliente = await _clienteRepo.ObterPorCpfAsync(request.ClienteCpf);
 

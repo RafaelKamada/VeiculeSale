@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using Domain.Exceptions;
 
 namespace Domain.Entities
 {
@@ -38,7 +39,7 @@ namespace Domain.Entities
         public void Vender()
         {
             if (Status != VeiculoStatus.Disponivel)
-                throw new Exception("Veículo não está disponível.");
+                throw new DomainException("Veículo não está disponível.");
 
             Status = VeiculoStatus.Vendido;
         }

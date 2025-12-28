@@ -1,8 +1,8 @@
 using Application.UseCases.Clientes.Commands.CadastrarCliente;
-using Application.UseCases.Clientes.DTOs;
 using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Interfaces;
-using Moq;
+using Moq; 
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -50,7 +50,7 @@ namespace Application.Tests
                 Telefone = "999999999"
             };
 
-            await Assert.ThrowsAsync<System.Exception>(() => handler.Handle(command, CancellationToken.None));
+            await Assert.ThrowsAsync<DomainException>(() => handler.Handle(command, CancellationToken.None));
         }
     }
 }

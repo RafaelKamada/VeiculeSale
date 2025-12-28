@@ -45,7 +45,7 @@ namespace Application.Tests
 
             var command = new AtualizarClienteCommand { Id = System.Guid.NewGuid(), Nome = "x", Email = "x@x.com", Telefone = "x" };
 
-            await Assert.ThrowsAsync<System.Exception>(() => handler.Handle(command, CancellationToken.None));
+            await Assert.ThrowsAsync<System.Collections.Generic.KeyNotFoundException>(() => handler.Handle(command, CancellationToken.None));
         }
     }
 }

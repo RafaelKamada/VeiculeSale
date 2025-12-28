@@ -1,5 +1,6 @@
 ﻿using Application.UseCases.Clientes.DTOs;
 using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Interfaces;
 using MediatR; 
 
@@ -19,7 +20,7 @@ namespace Application.UseCases.Clientes.Commands.CadastrarCliente
             var clienteExistente = await _repository.ObterPorCpfAsync(request.Cpf);
 
             if (clienteExistente != null)
-                throw new Exception("Já existe um cliente cadastrado com este CPF.");
+                throw new DomainException("Já existe um cliente cadastrado com este CPF.");
              
             var cliente = new Cliente(request.Nome, request.Cpf, request.Email, request.Telefone);
              

@@ -1,3 +1,4 @@
+using Domain.Exceptions;
 using Domain.ValueObjects;
 using System;
 using Xunit;
@@ -19,7 +20,7 @@ namespace Domain.Tests
         [InlineData("a@b")]
         public void Email_Invalido_Lanca(string valor)
         {
-            Assert.Throws<Exception>(() => new Email(valor));
+            Assert.Throws<DomainException>(() => new Email(valor));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions; 
+﻿using Domain.Exceptions;
+using System.Text.RegularExpressions; 
 
 namespace Domain.ValueObjects
 {
@@ -9,10 +10,10 @@ namespace Domain.ValueObjects
         public Email(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
-                throw new Exception("E-mail não pode ser vazio.");
+                throw new DomainException("E-mail não pode ser vazio.");
 
             if (!Regex.IsMatch(address, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"))
-                throw new Exception("E-mail inválido.");
+                throw new DomainException("E-mail inválido.");
 
             Address = address;
         }

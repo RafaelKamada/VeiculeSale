@@ -1,5 +1,6 @@
 ﻿using Application.UseCases.Clientes.DTOs;
-using MediatR; 
+using MediatR;
+
 namespace Application.UseCases.Clientes.Commands.AtualizarCliente
 {
     public class AtualizarClienteCommand : IRequest<ClienteDto>

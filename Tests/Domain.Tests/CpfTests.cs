@@ -1,3 +1,4 @@
+using Domain.Exceptions;
 using Domain.ValueObjects;
 using System;
 using Xunit;
@@ -23,7 +24,7 @@ namespace Domain.Tests
         [InlineData("111.111.111-11")]
         public void Cpf_Invalido_Lanca(string valor)
         {
-            Assert.Throws<Exception>(() => new Cpf(valor));
+            Assert.Throws<DomainException>(() => new Cpf(valor));
         }
     }
 }

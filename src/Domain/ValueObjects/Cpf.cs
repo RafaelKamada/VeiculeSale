@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions; 
+﻿using Domain.Exceptions;
+using System.Text.RegularExpressions; 
 
 namespace Domain.ValueObjects
 {
@@ -9,12 +10,12 @@ namespace Domain.ValueObjects
         public Cpf(string numero)
         {
             if (string.IsNullOrWhiteSpace(numero))
-                throw new Exception("CPF é obrigatório.");
+                throw new DomainException("CPF é obrigatório.");
              
             var apenasDigitos = Regex.Replace(numero, @"[^\d]", "");
 
             if (!Validar(apenasDigitos))
-                throw new Exception($"CPF inválido: {numero}");
+                throw new DomainException($"CPF inválido: {numero}");
 
             Numero = apenasDigitos;
         }

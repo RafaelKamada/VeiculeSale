@@ -17,7 +17,7 @@ namespace Application.UseCases.Clientes.Commands.AtualizarCliente
         {
             var cliente = await _repository.ObterPorIdAsync(request.Id);
 
-            if (cliente == null) throw new Exception("Cliente não encontrado.");
+            if (cliente == null) throw new KeyNotFoundException("Cliente não encontrado.");
              
             cliente.AtualizarDados(request.Nome, request.Email, request.Telefone);
              
