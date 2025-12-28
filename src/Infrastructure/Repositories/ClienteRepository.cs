@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
+using Domain.ValueObjects;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -28,7 +29,18 @@ namespace Infrastructure.Repositories
 
         public async Task<Cliente?> ObterPorCpfAsync(string cpf)
         {
-            return await _context.Clientes.FirstOrDefaultAsync(c => c.Cpf == cpf);
+            Cpf cpfVo;
+
+            try
+            {
+                cpfVo = new Cpf(cpf);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException($"Erro ao processar CPF: {ex.Message}");
+            }
+
+            return await _context.Clientes.FirstOrDefaultAsync(c => c.Cpf == cpfVo);
         }
 
         public async Task<Cliente?> ObterPorIdAsync(Guid id)

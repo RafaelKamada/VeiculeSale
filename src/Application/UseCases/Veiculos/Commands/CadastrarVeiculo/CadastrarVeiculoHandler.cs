@@ -1,10 +1,11 @@
-﻿using Domain.Entities;
+﻿using Application.UseCases.Veiculos.DTOs;
+using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
 
 namespace Application.UseCases.Veiculos.Commands.CadastrarVeiculo
 {
-    public class CadastrarVeiculoHandler : IRequestHandler<CadastrarVeiculoCommand, Guid>
+    public class CadastrarVeiculoHandler : IRequestHandler<CadastrarVeiculoCommand, VeiculoDto>
     {
         private readonly IVeiculoRepository _repository;
          
@@ -13,7 +14,7 @@ namespace Application.UseCases.Veiculos.Commands.CadastrarVeiculo
             _repository = repository;
         }
 
-        public async Task<Guid> Handle(CadastrarVeiculoCommand request, CancellationToken cancellationToken)
+        public async Task<VeiculoDto> Handle(CadastrarVeiculoCommand request, CancellationToken cancellationToken)
         { 
             var veiculo = new Veiculo(
                 request.Marca,
@@ -25,7 +26,7 @@ namespace Application.UseCases.Veiculos.Commands.CadastrarVeiculo
              
             await _repository.AdicionarAsync(veiculo);
              
-            return veiculo.Id;
+            return VeiculoDto.FromEntity(veiculo);
         }
     }
 }

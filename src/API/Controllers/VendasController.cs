@@ -1,4 +1,5 @@
 ﻿using Application.UseCases.Vendas.Commands.RealizarVenda;
+using Application.UseCases.Vendas.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,15 +17,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(VendaRealizadaDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RealizarVenda([FromBody] RealizarVendaCommand command)
         {
             try
             {
-                var vendaId = await _mediator.Send(command);
+                var result = await _mediator.Send(command);
 
-                return CreatedAtAction(nameof(RealizarVenda), new { id = vendaId }, vendaId);
+                return CreatedAtAction(nameof(RealizarVenda), new { id = result.Id }, result);
             }
             catch (Exception ex)
             {

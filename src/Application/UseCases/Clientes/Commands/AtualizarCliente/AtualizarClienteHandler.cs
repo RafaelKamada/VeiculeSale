@@ -1,9 +1,10 @@
-﻿using Domain.Interfaces;
+﻿using Application.UseCases.Clientes.DTOs;
+using Domain.Interfaces;
 using MediatR; 
 
 namespace Application.UseCases.Clientes.Commands.AtualizarCliente
 {
-    public class AtualizarClienteHandler : IRequestHandler<AtualizarClienteCommand, bool>
+    public class AtualizarClienteHandler : IRequestHandler<AtualizarClienteCommand, ClienteDto>
     {
         private readonly IClienteRepository _repository;
 
@@ -12,7 +13,7 @@ namespace Application.UseCases.Clientes.Commands.AtualizarCliente
             _repository = repository;
         }
 
-        public async Task<bool> Handle(AtualizarClienteCommand request, CancellationToken cancellationToken)
+        public async Task<ClienteDto> Handle(AtualizarClienteCommand request, CancellationToken cancellationToken)
         {
             var cliente = await _repository.ObterPorIdAsync(request.Id);
 
@@ -22,7 +23,7 @@ namespace Application.UseCases.Clientes.Commands.AtualizarCliente
              
             await _repository.AtualizarAsync(cliente);
 
-            return true;
+            return ClienteDto.FromEntity(cliente);
         }
     }
 }

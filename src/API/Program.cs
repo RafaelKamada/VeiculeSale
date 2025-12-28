@@ -13,7 +13,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // DbContext com PostgreSQL
 builder.Services.AddDbContext<VeiculeSaleDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+    options.UseNpgsql(connectionString);
+
+    options.EnableSensitiveDataLogging();
+    options.EnableDetailedErrors();
+});
 
 // Registrando os Repositórios
 builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();

@@ -1,11 +1,12 @@
-﻿using Domain.Entities;
+﻿using Application.UseCases.Vendas.DTOs;
+using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces;
 using MediatR; 
 
 namespace Application.UseCases.Vendas.Commands.RealizarVenda
 {
-    public class RealizarVendaHandler : IRequestHandler<RealizarVendaCommand, Guid>
+    public class RealizarVendaHandler : IRequestHandler<RealizarVendaCommand, VendaRealizadaDto>
     {
         private readonly IVeiculoRepository _veiculoRepo;
         private readonly IClienteRepository _clienteRepo;
@@ -24,7 +25,7 @@ namespace Application.UseCases.Vendas.Commands.RealizarVenda
             _pagamentoRepo = pagamentoRepo;
         }
 
-        public async Task<Guid> Handle(RealizarVendaCommand request, CancellationToken cancellationToken)
+        public async Task<VendaRealizadaDto> Handle(RealizarVendaCommand request, CancellationToken cancellationToken)
         {
             var veiculo = await _veiculoRepo.ObterPorIdAsync(request.VeiculoId);
 
@@ -38,7 +39,7 @@ namespace Application.UseCases.Vendas.Commands.RealizarVenda
 
             if (cliente is null)
             {
-                cliente = new Cliente(request.ClienteNome, request.ClienteCpf, request.ClienteEmail);
+                cliente = new Cliente(request.ClienteNome, request.ClienteCpf, request.ClienteEmail, request.ClienteTelefone);
                 await _clienteRepo.AdicionarAsync(cliente);
             }
 
@@ -50,7 +51,7 @@ namespace Application.UseCases.Vendas.Commands.RealizarVenda
             var pagamento = new Pagamento(venda.Id, venda.ValorTotal, codigoTransacaoInicial);
             await _pagamentoRepo.AdicionarAsync(pagamento);
 
-            return venda.Id;
+            return VendaRealizadaDto.FromEntity(venda, pagamento);
         }
     }
 }

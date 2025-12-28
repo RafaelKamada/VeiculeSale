@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,22 +13,31 @@ namespace Infrastructure.Configurations
 
             builder.Property(c => c.Nome)
                 .IsRequired()
-                .HasMaxLength(200);
+                .HasMaxLength(100);
 
-            builder.Property(c => c.Cpf)
-                .IsRequired()
-                .HasMaxLength(14);  
+            builder.Property(c => c.Telefone)
+                 .HasMaxLength(20);
 
             builder.Property(c => c.Email)
-                .HasMaxLength(150);
+            .HasConversion(
+                email => email.Address,     
+                address => new Email(address)  
+            )
+            .HasColumnName("Email")
+            .HasMaxLength(100)
+            .IsRequired();
+
+            builder.Property(c => c.Cpf)
+            .HasConversion(
+                cpf => cpf.Numero,           
+                numero => new Cpf(numero)    
+            )
+            .HasColumnName("Cpf")
+            .HasMaxLength(11)
+            .IsFixedLength()
+            .IsRequired();
              
-            builder.HasIndex(c => c.Cpf)
-                .IsUnique();
-             
-            builder.HasMany(c => c.Compras)
-                .WithOne(v => v.Cliente)
-                .HasForeignKey(v => v.ClienteId)
-                .OnDelete(DeleteBehavior.Restrict); 
+            builder.HasIndex(c => c.Cpf).IsUnique();
         }
     }
 }
