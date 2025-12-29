@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veiculesale-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: veiculesale-api
+  template:
+    metadata:
+      labels:
+        app: veiculesale-api
+    spec:
+      containers:
+      - name: veiculesale-api
+        image: veiculesale:latest  
+        imagePullPolicy: Never 
+        ports:
+        - containerPort: 8080  
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Host=postgres-service;Port=5432;Database=veiculos;Username=postgres;Password=postgres;"
+        - name: ASPNETCORE_ENVIRONMENT 
+          value: "Development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: veiculesale-service
+spec:
+  type: NodePort 
+  selector:
+    app: veiculesale-api
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30000
