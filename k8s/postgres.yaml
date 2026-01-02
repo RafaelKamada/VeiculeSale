@@ -3,12 +3,24 @@ kind: Service
 metadata:
   name: postgres-service
 spec:
-  ports:
-  - port: 5432
-    targetPort: 5432
   selector:
     app: postgres
-  clusterIP: None
+  ports:
+    - port: 5432
+      targetPort: 5432
+  clusterIP: None 
+
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
 
 ---
 apiVersion: apps/v1
@@ -16,24 +28,41 @@ kind: Deployment
 metadata:
   name: postgres
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: postgres
-  replicas: 1
   template:
     metadata:
       labels:
         app: postgres
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
-        env:
-        - name: POSTGRES_USER
-          value: "postgres"
-        - name: POSTGRES_PASSWORD
-          value: "postgres"
-        - name: POSTGRES_DB
-          value: "veiculos"
-        ports:
-        - containerPort: 5432
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: veiculesale-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: veiculesale-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: veiculesale-secrets
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 5432 
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage 
+              subPath: postgres-db-data
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc

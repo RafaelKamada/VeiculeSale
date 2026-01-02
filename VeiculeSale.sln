@@ -19,7 +19,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{82B993AA-E482-4547-A3E4-6D13E86666DC}"
 	ProjectSection(SolutionItems) = preProject
 		k8s\api.yaml = k8s\api.yaml
+		k8s\configmap.yaml = k8s\configmap.yaml
 		k8s\postgres.yaml = k8s\postgres.yaml
+		k8s\secrets.yaml = k8s\secrets.yaml
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"

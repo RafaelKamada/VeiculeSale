@@ -20,9 +20,15 @@ spec:
         - containerPort: 8080  
         env:
         - name: ConnectionStrings__DefaultConnection
-          value: "Host=postgres-service;Port=5432;Database=veiculos;Username=postgres;Password=postgres;"
+          valueFrom:
+            secretKeyRef:
+              name: veiculesale-secrets
+              key: CONNECTION_STRING
         - name: ASPNETCORE_ENVIRONMENT 
-          value: "Development"
+          valueFrom:
+            configMapKeyRef:
+              name: veiculesale-config
+              key: ASPNETCORE_ENVIRONMENT
 ---
 apiVersion: v1
 kind: Service
