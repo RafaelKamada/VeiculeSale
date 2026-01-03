@@ -36,12 +36,11 @@ namespace Application.UseCases.Vendas.Commands.RealizarVenda
             if (veiculo.Status != VeiculoStatus.Disponivel)
                 throw new DomainException("Veículo não está disponível para venda.");
 
-            var cliente = await _clienteRepo.ObterPorCpfAsync(request.ClienteCpf);
+            var cliente = await _clienteRepo.ObterPorIdAsync(request.ClienteId);
 
             if (cliente is null)
             {
-                cliente = new Cliente(request.ClienteNome, request.ClienteCpf, request.ClienteEmail, request.ClienteTelefone);
-                await _clienteRepo.AdicionarAsync(cliente);
+                throw new DomainException("Cliente não encontrado. Cadastre o cliente antes de realizar a venda.");
             }
 
             var venda = new Venda(veiculo.Id, cliente.Id, veiculo.Preco);

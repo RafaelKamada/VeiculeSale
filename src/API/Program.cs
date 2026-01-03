@@ -3,6 +3,7 @@ using Domain.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,14 +31,27 @@ builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
 // MediatR.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.UseCases.Veiculos.Commands.CadastrarVeiculo.CadastrarVeiculoHandler).Assembly));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    { 
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    }
+);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 // Global Exception
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -56,6 +70,7 @@ if (!app.Environment.IsDevelopment())
 } 
 
 app.UseAuthorization();
+app.MapHealthChecks("/health");
 
 app.MapControllers();
 

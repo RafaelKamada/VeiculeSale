@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Enums;
+using Domain.Interfaces;
 using MediatR; 
 
 namespace Application.UseCases.Veiculos.Commands.EditarVeiculo
@@ -18,7 +19,10 @@ namespace Application.UseCases.Veiculos.Commands.EditarVeiculo
 
             if (veiculo == null)
                 throw new KeyNotFoundException("Veículo não encontrado.");
-             
+
+            if (veiculo.Status == VeiculoStatus.Vendido)
+                throw new InvalidOperationException("Veículo já foi vendido e não pode ser editado.");
+
             veiculo.AtualizarDados(
                 request.Marca,
                 request.Modelo,
