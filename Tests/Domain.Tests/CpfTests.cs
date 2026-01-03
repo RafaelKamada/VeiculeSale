@@ -10,7 +10,7 @@ namespace Domain.Tests
         [Fact]
         public void Cpf_Valido_CriaObjeto()
         {
-            var raw = "529.982.247-25"; // exemplo válido
+            var raw = "529.982.247-25"; 
 
             var cpf = new Cpf(raw);
 
