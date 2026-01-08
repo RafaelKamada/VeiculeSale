@@ -43,6 +43,9 @@ O projeto foi desenhado para ser desacoplado e testável, seguindo rigorosamente
 
 ![Arquitetura](docs/arquitetura.png) 
 
+![Arquitetura - Aplicação](docs/arquiteruraAplication.png) 
+
+![Arquitetura - Kubernetes](docs/arquiteturaKubernetes.png) 
 ---
 
 ## 🛠 Tecnologias
